@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ITreeState, ITreeOptions } from 'angular-tree-component';
+import { ITreeState, ITreeOptions, TREE_ACTIONS, KEYS, IActionMapping, TreeModel, TreeNode } from 'angular-tree-component';
 import { v4 } from 'uuid';
 
 
@@ -25,7 +25,16 @@ export class AppComponent {
             ...node.data,
             id: v4(),
             name: `copy of ${node.data.name}`
-        })
+        }),
+        actionMapping: {
+            mouse: {
+                dblClick: (tree: TreeModel, node: TreeNode, $event: any) => {
+                    if (node.hasChildren) {
+                        TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
+                    }
+                }
+            }
+        }
     };
 
     nodes01 = [
