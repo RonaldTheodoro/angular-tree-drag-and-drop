@@ -19,7 +19,8 @@ export class AppComponent {
     };
 
     options: ITreeOptions = {
-        allowDrag: (node) => node.isLeaf,
+        allowDrag: (node) => true,
+        allowDrop: (node) => true,
         getNodeClone: (node) => ({
             ...node.data,
             id: v4(),
